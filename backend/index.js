@@ -1,14 +1,11 @@
-const { response } = require('express')
-const express = require('express')
-const { request } = require('../../oversee-old-version/oversee-backend/app')
-const app = express()
+const http = require('http')
 
-app.get('/', (request, response) => {
-    response.send('<p>Oversee backend api</p>')
-})
+const app = require('./app')
+const config = require('./utils/config')
+const logger = require('./utils/logger')
 
-const PORT = 5000
+const server = http.createServer(app)
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
+server.listen(config.PORT, () => {
+    logger.info(`Server running on port ${config.PORT}`)
 })
