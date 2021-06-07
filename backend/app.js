@@ -7,6 +7,9 @@ const config = require('./utils/config')
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 
+const userRouter = require('./routes/user.route')
+const teamRouter = require('./routes/team.route')
+
 const app = express()
 
 //Connecting to mongoDB
@@ -28,6 +31,9 @@ app.use(middleware.requestLogger)
 app.get('/', (request, response) => {
     response.send('<p>Oversee backend api</p>')
 })
+
+app.use('/api/users', userRouter)
+app.use('/api/teams', teamRouter)
 
 app.use(middleware.unknownEndPoint)
 app.use(middleware.errorHandler)

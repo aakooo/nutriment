@@ -27,7 +27,13 @@ var userSchema = new mongoose.Schema({
     phone: {
         type: Number,
         unique: true
-    }
+    },
+    teams: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Team'
+        }
+    ]
 }, {
     timestamps: true
 })
