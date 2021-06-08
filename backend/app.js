@@ -8,6 +8,7 @@ const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 
 const userRouter = require('./routes/user.route')
+const loginRouter = require('./routes/login.route')
 const teamRouter = require('./routes/team.route')
 
 const app = express()
@@ -33,6 +34,7 @@ app.get('/', (request, response) => {
 })
 
 app.use('/api/users', userRouter)
+app.use('/api/login', loginRouter)
 app.use('/api/teams', teamRouter)
 
 app.use(middleware.unknownEndPoint)
