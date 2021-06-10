@@ -1,7 +1,9 @@
 const userRouter = require('express').Router()
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const User = require('../models/user.model')
+const { getTokenFrom } = require('./reqHelper')
 
 userRouter.post('/', async (req, res) => {
     const hash = await bcrypt.hash(req.body.password, 10)
@@ -27,13 +29,44 @@ userRouter.get('/', async (req, res) => {
     res.json(users.map(u => u.toJSON()))
 })
 
-userRouter.get('/:id', async (req, res) => {
-    const id = req.params.id
+userRouter.get('/:username', async (req, res) => {
+    const token = getTokenFrom(req)
 
-    const user = await User
-        .findById(id).populate('teams')
+    const decodedToken = jwt.verify(token, process.env.SECRET)
 
-    res.json(user)
+    if (!token || !decodedToken) {
+        return res.status(401).json({ error: 'token missing or invalid' })
+    }
+
+    const user = await User.findOne({ username: req.params.username })
+
+    res.json(user.toJSON())
+})
+
+//Errors yet to be cleared in this route
+userRouter.put('/', async (req, res) => {
+    const body = req.body
+    const token = getTokenFrom(req)
+
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+
+    if (!token || !decodedToken) {
+        return res.status(401).json({ error: 'token missing or invalid' })
+    }
+
+    const toUpdate = {
+        username: body.username,
+        firstName: body.firstName,
+        lastName: body.lastName,
+        email: body.email,
+        phone: body.phone,
+        teams: body.teams,
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(token.id, toUpdate)
+    console.log('Database return', updatedUser);
+
+    res.json(toUpdate)
 })
 
 module.exports = userRouter

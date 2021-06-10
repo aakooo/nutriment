@@ -17,6 +17,8 @@ describe('Authentication Routes', () => {
             .send(creds)
 
         expect(response.body.token)
+        console.log(response.body)
+        expect(response.body.username).toBe('batman')
     })
 
     creds = { ...creds, username: 'wayne@example.com' }

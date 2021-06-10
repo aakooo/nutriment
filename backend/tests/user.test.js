@@ -22,7 +22,11 @@ describe('Get user details functionality', () => {
             .post('/api/login')
             .send(testEnv.creds)
 
-        
+        const response = await api
+            .get(`/api/users/${loginRes.username}`)
+            .set('Authorization', `Bearer ${loginRes.token}`)
+
+        expect(response.body.username).toBe(loginRes.username)
     })
 })
 
