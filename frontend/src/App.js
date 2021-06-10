@@ -1,9 +1,10 @@
 import React from 'react'
+import Home from './components/Home'
 
 const App = () => {
   return (
     <div>
-      <p>Oversee frontend app</p>
+      <Home />
     </div>
   );
 }
