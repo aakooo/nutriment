@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import authService from '../../services/authService'
 
 import { Form } from 'react-bootstrap'
 import { Button, bgGradient, mediaQuery, ButtonHolder } from '../styled'
@@ -31,6 +32,15 @@ const labelStyle = {
 }
 
 const LoginForm = () => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    const onSubmit = async event => {
+        event.preventDefault()
+
+        const token = await authService.login({ username, password })
+        console.log(token)
+    }
 
     return (
         <Div>
@@ -39,13 +49,15 @@ const LoginForm = () => {
             <Form style={{
                 width: '70%',
                 margin: 'auto',
-            }}>
+            }}
+                onSubmit={onSubmit} >
                 <Form.Group>
                     <Form.Label style={labelStyle}>Username/Email</Form.Label>
 
                     <Form.Control
                         type="text"
-                        name="username" />
+                        name="username"
+                        onChange={({ target }) => setUsername(target.value)} />
                 </Form.Group>
 
                 <Form.Group>
@@ -53,7 +65,8 @@ const LoginForm = () => {
 
                     <Form.Control
                         type="password"
-                        name="username" />
+                        name="password"
+                        onChange={({ target }) => setPassword(target.value)} />
                 </Form.Group>
 
                 <ButtonHolder style={{

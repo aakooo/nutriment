@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import authService from '../../services/authService'
 
 import { Form, Col } from 'react-bootstrap'
 import styled from 'styled-components'
@@ -32,6 +33,23 @@ const labelStyle = {
 }
 
 const SignupForm = () => {
+    const [firstName, setFirsName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [password, setPassword] = useState('');
+
+    const onSubmit = async event => {
+        event.preventDefault()
+
+        const userData = {
+            firstName, lastName, username, email, phone, password
+        }
+
+        const addedUser = await authService.createUser(userData)
+        console.log(addedUser)
+    }
 
     return (
         <Div>
@@ -41,7 +59,8 @@ const SignupForm = () => {
                 style={{
                     width: '80%',
                     margin: 'auto',
-                }}>
+                }}
+                onSubmit={onSubmit}>
                 <Form.Row>
                     <Form.Group 
                         as={Col}
@@ -51,7 +70,8 @@ const SignupForm = () => {
                         <Form.Control
                             size="sm"
                             type="text"
-                            name="username" />
+                            name="firstName"
+                            onChange={({target}) => setFirsName(target.value)} />
                     </Form.Group>
 
                     <Form.Group as={Col} lg="6" md="6" sm="12">
@@ -60,7 +80,8 @@ const SignupForm = () => {
                         <Form.Control
                             size="sm"
                             type="text"
-                            name="username" />
+                            name="lastName"
+                            onChange={({ target }) => setLastName(target.value)} />
                     </Form.Group>
                 </Form.Row>
 
@@ -70,7 +91,8 @@ const SignupForm = () => {
                     <Form.Control
                         size="sm"
                         type="text"
-                        name="username" />
+                        name="username"
+                        onChange={({ target }) => setUsername(target.value)} />
                 </Form.Group>
 
                 <Form.Group>
@@ -79,7 +101,8 @@ const SignupForm = () => {
                     <Form.Control
                         size="sm"
                         type="text"
-                        name="username" />
+                        name="email"
+                        onChange={({ target }) => setEmail(target.value)} />
                 </Form.Group>
 
                 <Form.Group>
@@ -88,7 +111,8 @@ const SignupForm = () => {
                     <Form.Control
                         size="sm"
                         type="text"
-                        name="username" />
+                        name="phone"
+                        onChange={({ target }) => setPhone(target.value)} />
                 </Form.Group>
 
                 <Form.Group>
@@ -96,8 +120,9 @@ const SignupForm = () => {
 
                     <Form.Control
                         size="sm"
-                        type="text"
-                        name="username" />
+                        type="password"
+                        name="password"
+                        onChange={({ target }) => setPassword(target.value)} />
                 </Form.Group>
 
                 <ButtonHolder>
