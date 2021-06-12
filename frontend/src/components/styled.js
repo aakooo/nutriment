@@ -13,7 +13,9 @@ export const Button = styled.button`
     height: 2.7vw;
     min-height: 35px;
     background-color: ${themeBlue};
-    color: white;`
+    color: white;
+    border: none;
+    box-shadow: 0px 3px 5px #00000075`
 
 export const ButtonHolder = styled.div`
     text-align: center;`

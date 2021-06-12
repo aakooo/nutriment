@@ -1,7 +1,14 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 import { Form } from 'react-bootstrap'
 import { Button, bgGradient, mediaQuery, ButtonHolder } from '../styled'
 import styled from 'styled-components'
+
+const Div = styled.div`
+    background: ${bgGradient};
+    height: 100%;
+    padding: 1vw`
 
 const H2 = styled.h2`
     font-family: 'Rubik', sans-serif;
@@ -13,10 +20,10 @@ const H2 = styled.h2`
         font-size: 7vw;
     }`
 
-const Div = styled.div`
-    background: ${bgGradient};
-    height: 100%;
-    padding: 1vw`
+const P = styled.p`
+    margin-top: 7%;
+    font-size: 1.2em;
+    text-align: center;`
 
 const labelStyle = {
     textAlign: 'left',
@@ -57,6 +64,13 @@ const LoginForm = () => {
                     </Button>
                 </ButtonHolder>
             </Form>
+
+            <P>New here? <Link 
+                to="/signup"
+                style={{
+                    color: 'white',
+                }}>Signup</Link>
+            </P>
         </Div>
     )
 }
