@@ -8,12 +8,12 @@ const noPadding = { padding: 0 }
 const Home = () => {
 
     return (
-        <Row>
-            <Col xs="12" lg="7" style={noPadding}>
+        <Row style={{ minHeight: '100vh' }}>
+            <Col xs="12" lg="7" md="6" style={noPadding}>
                 <Overview />
             </Col>
 
-            <Col xs="12" lg="5" style={noPadding}>
+            <Col xs="12" lg="5" md="6" style={noPadding}>
                 <LoginForm />
             </Col>
         </Row>
