@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import authService from '../../services/authService'
+import { useDispatch, useSelector } from 'react-redux'
+import { userLogin } from '../../reducers/tokenReducer'
 
 import { Form } from 'react-bootstrap'
 import { Button, bgGradient, mediaQuery, ButtonHolder } from '../styled'
@@ -32,14 +33,16 @@ const labelStyle = {
 }
 
 const LoginForm = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
 
-    const onSubmit = async event => {
+    const dispatch = useDispatch()
+    const token = useSelector(state => state)
+
+    const onSubmit = event => {
         event.preventDefault()
 
-        const token = await authService.login({ username, password })
-        console.log(token)
+        dispatch(userLogin({ username, password }))
     }
 
     return (
