@@ -43,6 +43,7 @@ const LoginForm = () => {
         event.preventDefault()
 
         dispatch(userLogin({ username, password }))
+        console.log(token)
     }
 
     return (
