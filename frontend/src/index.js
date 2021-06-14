@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { Provider } from 'react-redux'
@@ -8,10 +8,16 @@ import { Provider } from 'react-redux'
 import './index.css'
 import App from './App'
 import tokenReducer from './reducers/tokenReducer'
+import errorReducer from './reducers/errorReducer'
 import reportWebVitals from './reportWebVitals'
 
+const reducer = combineReducers({
+  token: tokenReducer,
+  error: errorReducer,
+})
+
 const store = createStore(
-  tokenReducer,
+  reducer,
   composeWithDevTools(
     applyMiddleware(thunk)
   ))

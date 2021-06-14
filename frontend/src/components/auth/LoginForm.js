@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { userLogin } from '../../reducers/tokenReducer'
+import { removeError } from '../../reducers/errorReducer'
 
-import { Form } from 'react-bootstrap'
+import { Alert, Form } from 'react-bootstrap'
 import { Button, bgGradient, mediaQuery, ButtonHolder } from '../styled'
 import styled from 'styled-components'
 
@@ -37,7 +38,16 @@ const LoginForm = () => {
     const [password, setPassword] = useState('')
 
     const dispatch = useDispatch()
-    const token = useSelector(state => state)
+    const token = useSelector(state => state.token)
+    const errorMessage = useSelector(state => state.error)
+
+    useEffect(() => {
+        if (errorMessage) {
+            setTimeout(() => {
+                dispatch(removeError())
+            }, 5000);
+        }
+    }, [dispatch, errorMessage])
 
     const onSubmit = event => {
         event.preventDefault()
@@ -49,6 +59,10 @@ const LoginForm = () => {
     return (
         <Div>
             <H2>Login</H2>
+
+            {errorMessage 
+                ? <Alert variant="danger">{errorMessage}</Alert>
+                : null }
 
             <Form style={{
                 width: '70%',

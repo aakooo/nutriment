@@ -1,4 +1,5 @@
 import authService from "../services/authService"
+import { showError } from "./errorReducer"
 
 const tokenReducer = (state = null, action) => {
     switch (action.type) {
@@ -29,14 +30,19 @@ export const initializeToken = () => {
 }
 
 export const userLogin = creds => {
+    
     return async dispatch => {
-        const token = await authService.login(creds)
-        localStorage.setItem('token', JSON.stringify(token))
+        try {
+            const token = await authService.login(creds)
+            localStorage.setItem('token', JSON.stringify(token))
 
-        dispatch({
-            type: 'LOGIN',
-            data: token,
-        })
+            dispatch({
+                type: 'LOGIN',
+                data: token,
+            })
+        } catch (error) {
+            dispatch(showError('Invalid Credentials'))
+        }
     }
 }
 

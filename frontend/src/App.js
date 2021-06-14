@@ -10,7 +10,7 @@ import { Container } from 'react-bootstrap'
 
 const App = () => {
   const dispatch = useDispatch()
-  const token = useSelector(state => state)
+  const token = useSelector(state => state.token)
 
   useEffect(() => {
     dispatch(initializeToken())
