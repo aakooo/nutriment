@@ -38,12 +38,13 @@ const SignupForm = () => {
     const dispatch = useDispatch()
     const notification = useSelector(state => state.notification)
 
-    const [firstName, setFirsName] = useState('');
+    const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
+    const [formErrors, setFormErrors] = useState(null);
 
     const onSubmit = async event => {
         event.preventDefault()
@@ -52,8 +53,21 @@ const SignupForm = () => {
             firstName, lastName, username, email, phone, password
         }
 
-        await authService.createUser(userData)
-        dispatch(showNotification('success', 'User Created'))
+        setFormErrors(authService.validateSignUpForm(userData))
+        
+        if (!formErrors) {
+            await authService.createUser(userData)
+            dispatch(showNotification('success', 'User Created'))
+        }
+    }
+
+    const renderError = (text, setStateVariable) => {
+
+        return (
+            <Form.Control.Feedback type="invalid">
+                {text}
+            </Form.Control.Feedback>
+        )
     }
 
     if (notification && notification.variant === 'success') {
@@ -80,7 +94,13 @@ const SignupForm = () => {
                             size="sm"
                             type="text"
                             name="firstName"
-                            onChange={({target}) => setFirsName(target.value)} />
+                            required
+                            isInvalid={formErrors && formErrors.firstName}
+                            onChange={({target}) => setFirstName(target.value)} />
+
+                        {formErrors && formErrors.firstName
+                            ? renderError(formErrors.firstName, setFirstName)
+                            : null}
                     </Form.Group>
 
                     <Form.Group as={Col} lg="6" md="6" sm="12">
@@ -90,7 +110,13 @@ const SignupForm = () => {
                             size="sm"
                             type="text"
                             name="lastName"
+                            required
+                            isInvalid={formErrors && formErrors.lastName}
                             onChange={({ target }) => setLastName(target.value)} />
+
+                        {formErrors && formErrors.lastName
+                            ? renderError(formErrors.lastName, setLastName)
+                            : null}
                     </Form.Group>
                 </Form.Row>
 
@@ -101,7 +127,13 @@ const SignupForm = () => {
                         size="sm"
                         type="text"
                         name="username"
+                        required
+                        isInvalid={formErrors && formErrors.username}
                         onChange={({ target }) => setUsername(target.value)} />
+
+                    {formErrors && formErrors.username
+                        ? renderError(formErrors.username, setUsername)
+                        : null}
                 </Form.Group>
 
                 <Form.Group>
@@ -111,7 +143,13 @@ const SignupForm = () => {
                         size="sm"
                         type="text"
                         name="email"
+                        required
+                        isInvalid={formErrors && formErrors.email}
                         onChange={({ target }) => setEmail(target.value)} />
+
+                    {formErrors && formErrors.email
+                        ? renderError(formErrors.email, setEmail)
+                        : null}
                 </Form.Group>
 
                 <Form.Group>
@@ -121,7 +159,13 @@ const SignupForm = () => {
                         size="sm"
                         type="text"
                         name="phone"
+                        required
+                        isInvalid={formErrors && formErrors.phone}
                         onChange={({ target }) => setPhone(target.value)} />
+
+                    {formErrors && formErrors.phone
+                        ? renderError(formErrors.phone, setPhone)
+                        : null}
                 </Form.Group>
 
                 <Form.Group>
@@ -131,7 +175,13 @@ const SignupForm = () => {
                         size="sm"
                         type="password"
                         name="password"
+                        required
+                        isInvalid={formErrors && formErrors.password}
                         onChange={({ target }) => setPassword(target.value)} />
+
+                    {formErrors && formErrors.password
+                        ? renderError(formErrors.password, setPassword)
+                        : null}
                 </Form.Group>
 
                 <ButtonHolder>
