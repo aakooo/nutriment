@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { showNotification } from '../../reducers/notificationReducer'
 import authService from '../../services/authService'
 
 import { Form, Col } from 'react-bootstrap'
@@ -33,6 +35,9 @@ const labelStyle = {
 }
 
 const SignupForm = () => {
+    const dispatch = useDispatch()
+    const notification = useSelector(state => state.notification)
+
     const [firstName, setFirsName] = useState('');
     const [lastName, setLastName] = useState('');
     const [username, setUsername] = useState('');
@@ -47,8 +52,12 @@ const SignupForm = () => {
             firstName, lastName, username, email, phone, password
         }
 
-        const addedUser = await authService.createUser(userData)
-        console.log(addedUser)
+        await authService.createUser(userData)
+        dispatch(showNotification('success', 'User Created'))
+    }
+
+    if (notification && notification.variant === 'success') {
+        return <Redirect to="/" />
     }
 
     return (

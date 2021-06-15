@@ -8,12 +8,12 @@ import { Provider } from 'react-redux'
 import './index.css'
 import App from './App'
 import tokenReducer from './reducers/tokenReducer'
-import errorReducer from './reducers/errorReducer'
+import notificationReducer from './reducers/notificationReducer'
 import reportWebVitals from './reportWebVitals'
 
 const reducer = combineReducers({
   token: tokenReducer,
-  error: errorReducer,
+  notification: notificationReducer,
 })
 
 const store = createStore(
