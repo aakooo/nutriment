@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { userLogin } from '../../reducers/tokenReducer'
-import { removeError } from '../../reducers/errorReducer'
+import { removeNotification } from '../../reducers/notificationReducer'
 
 import { Alert, Form } from 'react-bootstrap'
 import { Button, bgGradient, mediaQuery, ButtonHolder } from '../styled'
@@ -39,15 +39,15 @@ const LoginForm = () => {
 
     const dispatch = useDispatch()
     const token = useSelector(state => state.token)
-    const errorMessage = useSelector(state => state.error)
+    const notification = useSelector(state => state.notification)
 
     useEffect(() => {
-        if (errorMessage) {
+        if (notification) {
             setTimeout(() => {
-                dispatch(removeError())
+                dispatch(removeNotification())
             }, 5000);
         }
-    }, [dispatch, errorMessage])
+    }, [dispatch, notification])
 
     const onSubmit = event => {
         event.preventDefault()
@@ -60,8 +60,8 @@ const LoginForm = () => {
         <Div>
             <H2>Login</H2>
 
-            {errorMessage 
-                ? <Alert variant="danger">{errorMessage}</Alert>
+            {notification
+                ? <Alert variant={notification.variant}>{notification.message}</Alert>
                 : null }
 
             <Form style={{

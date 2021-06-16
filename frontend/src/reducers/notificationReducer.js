@@ -1,4 +1,4 @@
-const errorReducer = (state = null, action) => {
+const notificationReducer = (state = null, action) => {
     switch (action.type) {
         case 'ADD_ERROR':
             return action.data
@@ -11,18 +11,21 @@ const errorReducer = (state = null, action) => {
     }
 }
 
-export const showError = message => {
+export const showNotification = (variant, message) => {
     return ({
         type: 'ADD_ERROR',
-        data: message,
+        data: {
+            variant: variant,
+            message: message,
+        },
     })
 }
 
-export const removeError = () => {
+export const removeNotification = () => {
     return ({
         type: 'REMOVE_ERROR',
         data: null,
     })
 }
 
-export default errorReducer
+export default notificationReducer

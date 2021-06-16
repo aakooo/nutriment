@@ -1,5 +1,5 @@
 import authService from "../services/authService"
-import { showError } from "./errorReducer"
+import { showNotification } from "./notificationReducer"
 
 const tokenReducer = (state = null, action) => {
     switch (action.type) {
@@ -41,7 +41,7 @@ export const userLogin = creds => {
                 data: token,
             })
         } catch (error) {
-            dispatch(showError('Invalid Credentials'))
+            dispatch(showNotification('danger', 'Invalid Credentials'))
         }
     }
 }
