@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux'
 import { Redirect } from 'react-router'
 
 import { userLogout } from '../reducers/tokenReducer'
+import Header from './commons/Header'
+import Navbar from './commons/Navbar'
 
 const Dashboard = () => {
     const dispatch = useDispatch()
@@ -15,7 +17,8 @@ const Dashboard = () => {
 
     return (
         <div>
-            <p>Dashboard</p>
+            <Header />
+            <Navbar />
 
             <button
                 onClick={logout}>Logout</button>
