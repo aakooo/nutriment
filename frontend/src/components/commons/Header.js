@@ -12,7 +12,8 @@ const Div = styled.div`
     padding: 1vw;
     margin: 0;
     display: flex;
-    justify-content: space-between;`
+    justify-content: space-between;
+    z-index: 2;`
 
 const Header = () => {
 
