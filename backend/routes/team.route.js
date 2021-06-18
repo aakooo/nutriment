@@ -5,6 +5,7 @@ const Team = require('../models/team.model')
 const User = require('../models/user.model')
 const Milestone = require('../models/milestone.model')
 const Task = require('../models/task.model')
+const Message = require('../models/message.model')
 
 const jwt = require('jsonwebtoken')
 
@@ -71,6 +72,14 @@ teamRouter.post('/milestone', async (req, res) => {
 teamRouter.get('/milestone', async (req, res) => {
     const milestones = await Milestone
         .find({})
+        .populate('team')
+    
+    res.json(milestones)
+})
+
+teamRouter.get('/:teamId/milestone', async (req, res) => {
+    const milestones = await Milestone
+        .find({ team: mongoose.Types.ObjectId(req.params.teamId) })
         .populate('team')
     
     res.json(milestones)
@@ -214,6 +223,40 @@ teamRouter.delete('/milestone/task/:taskId', async (req, res) => {
     const deletedTask = await Task
         .findByIdAndDelete(req.params.taskId)
     res.json(deletedTask)
+})
+
+
+// Messages route
+teamRouter.post('/messages', async (req, res) => {
+    const token = getTokenFrom(req)
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+
+    if (!token || !decodedToken) {
+        return res.status(401).json({ error: 'token missing or invalid' })
+    }
+
+    const newMessage = new Message({
+        content: req.body.content,
+        teamId: mongoose.Types.ObjectId(req.body.teamId),
+        username: req.body.username
+    })
+
+    const savedMessage = await newMessage.save()
+    res.json(savedMessage)
+})
+
+teamRouter.get('/messages', async (req, res) => {
+    const messages = await Message
+        .find({})
+    
+    res.json(messages)
+})
+
+teamRouter.get('/:teamId/messages', async (req, res) => {
+    const messages = await Message
+        .find({ teamId: mongoose.Types.ObjectId(req.params.teamId) })
+    
+    res.json(messages)
 })
 
 module.exports = teamRouter
