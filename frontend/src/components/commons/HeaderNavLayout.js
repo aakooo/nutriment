@@ -14,6 +14,8 @@ const navStyle = {
     // padding: '2%',
     // paddingRight: '3%',
     width: 'fit-content',
+    height: '90',
+    minHeight: '100%',
 }
 
 const HeaderNavLayout = props => {
@@ -23,13 +25,13 @@ const HeaderNavLayout = props => {
             <Row lg="auto" md="auto" sm="auto">
                 <Header />
             </Row>
-            <Row>
+            <Row className="flex-grow-1 justify-content-stretch">
                 <Col 
                     lg="auto" md="auto" sm="auto"
                     style={navStyle} >
                     <Navbar />
                 </Col>
-                <Col>
+                <Col className="flex-grow-1">
                     {props.children}
                 </Col>
             </Row>
