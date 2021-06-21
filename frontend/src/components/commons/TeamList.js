@@ -1,20 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
-const TeamCard = () => {
+const TeamCard = (props) => {
 
     return (
         <div>
-            Team Card
+            {props.name}
         </div>
     )
 }
 
 const TeamList = () => {
+    const currentUser = useSelector(state => state.currentUser)
 
+    // useEffect(() => {
+
+    // }, [currentUser])
 
     return (
         <div>
-            <TeamCard />
+            <ul>
+                {currentUser.teams.map(team => {
+                    return <TeamCard name={team.name} key={team.id}/>
+                })}
+            </ul>
         </div>
     )
 }

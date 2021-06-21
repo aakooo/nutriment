@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router'
 
 import { userLogout } from '../reducers/tokenReducer'
-import userService from '../services/userService'
+import { initializeUser } from '../reducers/userReducer'
 import HeaderNavLayout from './commons/HeaderNavLayout'
 import TeamList from './commons/TeamList'
 
@@ -18,15 +18,8 @@ const Dashboard = () => {
     }
 
     useEffect(() => {
-        const fetchUser = async () => {
-            const user = await userService.getUserObject(token.username, token.token)
-            return user
-        }
-
-        fetchUser().then(user => {
-            console.log('Dashboard', user)
-        })
-    }, [token])
+        dispatch(initializeUser(token.username, token.token))
+    }, [token, dispatch])
 
     return (
         <HeaderNavLayout>

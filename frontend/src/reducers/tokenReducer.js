@@ -3,7 +3,7 @@ import { showNotification } from "./notificationReducer"
 
 const tokenReducer = (state = null, action) => {
     switch (action.type) {
-        case 'INIT':
+        case 'INIT_TOKEN':
             return action.data
 
         case 'LOGIN':
@@ -24,7 +24,7 @@ export const initializeToken = () => {
         : null
 
     return {
-        type: 'INIT',
+        type: 'INIT_TOKEN',
         data: token,
     }
 }

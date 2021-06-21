@@ -9,11 +9,13 @@ import './index.css'
 import App from './App'
 import tokenReducer from './reducers/tokenReducer'
 import notificationReducer from './reducers/notificationReducer'
+import userReducer from './reducers/userReducer'
 import reportWebVitals from './reportWebVitals'
 
 const reducer = combineReducers({
   token: tokenReducer,
   notification: notificationReducer,
+  currentUser: userReducer,
 })
 
 const store = createStore(

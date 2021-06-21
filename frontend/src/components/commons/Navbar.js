@@ -28,39 +28,33 @@ const Navbar = () => {
     return (
         <>
             <Nav.Item>
-                <Nav.Link style={navItemStyle}>
-                    <Link to="/dashboard">
-                        <img
-                            src={homeIcon}
-                            alt=""
-                            style={imgStyle} />
-                        <P>Home</P>
-                    </Link>
-                </Nav.Link>
+                <Link to="/dashboard" style={navItemStyle}>
+                    <img
+                        src={homeIcon}
+                        alt=""
+                        style={imgStyle} />
+                    <P>Home</P>
+                </Link>
             </Nav.Item>
 
             <Nav.Item>
-                <Nav.Link style={navItemStyle}>
-                    <Link to="/calendar">
-                        <img
-                            src={calendarIcon}
-                            alt=""
-                            style={imgStyle} />
-                        <P>Calendar</P>
-                    </Link>
-                </Nav.Link>
+                <Link to="/calendar" style={navItemStyle}>
+                    <img
+                        src={calendarIcon}
+                        alt=""
+                        style={imgStyle} />
+                    <P>Calendar</P>
+                </Link>
             </Nav.Item>
 
-            <Nav.Item>
-                <Nav.Link style={navItemStyle}>
-                    <Link to="/profile">
-                        <img
-                            src={profileIcon}
-                            alt=""
-                            style={imgStyle} />
-                        <P>Profile</P>
-                    </Link>
-                </Nav.Link>
+            <Nav.Item> 
+                <Link to="/profile" style={navItemStyle}>
+                    <img
+                        src={profileIcon}
+                        alt=""
+                        style={imgStyle} />
+                    <P>Profile</P>
+                </Link>
             </Nav.Item>
         </>
     )
