@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { Dropdown } from 'react-bootstrap'
 
 import logo from '../../img/oversee-logo.png'
 import plus from '../../img/plus_icon.png'
@@ -29,19 +30,29 @@ const Header = () => {
                     }} />
             </Link>
 
-            <button
-                style={{
-                    background: 'none',
-                    border: 'none',
-                }}>
-                <img
-                    src={plus}
-                    alt=""
+            <Dropdown>
+                <Dropdown.Toggle
                     style={{
+                        background: 'none',
+                        border: 'none',
                         width: '50%',
-                        minWidth: '7px',
-                    }} />
-            </button>
+                        padding: 'none',
+                        margin: 'none',
+                    }}>
+                    <img
+                        src={plus}
+                        alt=""
+                        style={{
+                            width: '90%',
+                            minWidth: '7px',
+                        }} />
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                    <Dropdown.Item>Create a Team</Dropdown.Item>
+                    <Dropdown.Item>Join a team</Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
         </Div>
     )
 }
