@@ -6,6 +6,7 @@ import { initializeToken } from './reducers/tokenReducer'
 import Home from './components/Home'
 import Signup from './components/Signup'
 import Dashboard from './components/Dashboard'
+import TeamHome from './components/TeamHome'
 import { Container } from 'react-bootstrap'
 
 const App = () => {
@@ -25,6 +26,9 @@ const App = () => {
             {token
               ? <Dashboard />
               : <Redirect to="/" />}
+          </Route>
+          <Route path="/:id">
+            <TeamHome />
           </Route>
           <Route path="/signup">
             <Signup />
