@@ -10,6 +10,7 @@ import TeamList from './commons/TeamList'
 const Dashboard = () => {
     const dispatch = useDispatch()
     const token = useSelector(state => state.token)
+    const currentUser = useSelector(state => state.currentUser)
 
     const logout = event => {
         dispatch(userLogout())
@@ -27,7 +28,7 @@ const Dashboard = () => {
                 onClick={logout} >
                 Logout
             </button>
-            <TeamList />
+            <TeamList user={currentUser}/>
         </HeaderNavLayout>
     )
 }
