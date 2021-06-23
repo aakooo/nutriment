@@ -1,11 +1,12 @@
 import React from 'react'
+import HeaderNavLayout from './commons/HeaderNavLayout'
 
 const JoinTeam = () => {
 
     return (
-        <div>
-            <p>JoinTeam</p>
-        </div>
+        <HeaderNavLayout>
+            Join a team
+        </HeaderNavLayout>
     )
 }
 
