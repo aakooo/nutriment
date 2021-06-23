@@ -31,7 +31,7 @@ const HeaderNavLayout = props => {
                     style={navStyle} >
                     <Navbar />
                 </Col>
-                <Col className="flex-grow-1">
+                <Col className="flex-grow-1" style={{ display: 'block', }}>
                     {props.children}
                 </Col>
             </Row>
