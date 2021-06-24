@@ -27,11 +27,11 @@ const App = () => {
               ? <Dashboard />
               : <Redirect to="/" />}
           </Route>
-          <Route path="/:id">
-            <TeamHome />
-          </Route>
           <Route path="/signup">
             <Signup />
+          </Route>
+          <Route path="/:id">
+            <TeamHome />
           </Route>
           <Route exact path="/">
             {!token
