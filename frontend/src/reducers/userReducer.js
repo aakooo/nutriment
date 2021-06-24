@@ -27,7 +27,7 @@ export const initializeUser = (username, token) => {
         } catch (error) {
             console.log('Error', error)
             showNotification('danger', 'Your session expired')
-            userLogout()
+            dispatch(userLogout())
         }
     }
 }

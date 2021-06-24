@@ -7,6 +7,7 @@ import Home from './components/Home'
 import Signup from './components/Signup'
 import Dashboard from './components/Dashboard'
 import TeamHome from './components/TeamHome'
+import JoinTeam from './components/JoinTeam'
 import { Container } from 'react-bootstrap'
 
 const App = () => {
@@ -22,6 +23,9 @@ const App = () => {
       <Container fluid>
 
         <Switch>
+          <Route path="/join">
+            <JoinTeam />
+          </Route>
           <Route path="/dashboard">
             {token
               ? <Dashboard />
