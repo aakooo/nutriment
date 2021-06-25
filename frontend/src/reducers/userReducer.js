@@ -1,6 +1,6 @@
 import userService from "../services/userService"
 import { showNotification } from "./notificationReducer"
-import { userLogout } from "./tokenReducer"
+// import { userLogout } from "./tokenReducer"
 
 const userReducer = (state=null, action) => {
     switch (action.type) {
@@ -27,7 +27,7 @@ export const initializeUser = (username, token) => {
         } catch (error) {
             console.log('Error', error)
             showNotification('danger', 'Your session expired')
-            dispatch(userLogout())
+            // dispatch(userLogout())
         }
     }
 }
