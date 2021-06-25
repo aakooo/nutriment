@@ -62,8 +62,12 @@ const Header = () => {
                         backgroundColor: themeGreen,
                         padding: '0.2em',
                     }}>
-                    <Dropdown.Item style={dropDownButtonStyle}>Create a Team</Dropdown.Item>
-                    <Dropdown.Item style={dropDownButtonStyle} href="/join">Join a team</Dropdown.Item>
+                    <Dropdown.Item
+                        as={Link} to="/"
+                        style={dropDownButtonStyle} >Create a Team</Dropdown.Item>
+                    <Dropdown.Item
+                        as={Link} to="/join" 
+                        style={dropDownButtonStyle} >Join a team</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
         </Div>

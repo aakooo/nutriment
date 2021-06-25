@@ -28,33 +28,39 @@ const Navbar = () => {
     return (
         <>
             <Nav.Item>
-                <Link to="/dashboard" style={navItemStyle}>
+                <Nav.Link 
+                    as={Link} to="/dashboard"
+                    style={navItemStyle} >
                     <img
                         src={homeIcon}
                         alt=""
                         style={imgStyle} />
                     <P>Home</P>
-                </Link>
+                </Nav.Link>
             </Nav.Item>
 
             <Nav.Item>
-                <Link to="/calendar" style={navItemStyle}>
+                <Nav.Link
+                    as={Link} to="/calendar"
+                    style={navItemStyle} >
                     <img
                         src={calendarIcon}
                         alt=""
                         style={imgStyle} />
                     <P>Calendar</P>
-                </Link>
+                </Nav.Link>
             </Nav.Item>
 
             <Nav.Item> 
-                <Link to="/profile" style={navItemStyle}>
+                <Nav.Link
+                    as={Link} to="/profile"
+                    style={navItemStyle} >
                     <img
                         src={profileIcon}
                         alt=""
                         style={imgStyle} />
                     <P>Profile</P>
-                </Link>
+                </Nav.Link>
             </Nav.Item>
         </>
     )
