@@ -21,10 +21,12 @@ const teamSchema = new mongoose.Schema({
     timestamps: true
 })
 
-teamSchema.set('toJSON', (request, returnedObject) => {
-    returnedObject.id = returnedOBject._id
-    delete returnedObject._id
-    delete returnedObject.__v
+teamSchema.set('toJSON', {
+    transform: (document, returnedObject) => {
+        returnedObject.id = returnedObject._id
+        delete returnedObject._id
+        delete returnedObject.__v
+    }
 })
 
 module.exports = mongoose.model('Team', teamSchema)

@@ -28,10 +28,12 @@ const taskSchema = new mongoose.Schema({
     timestamps: true
 })
 
-taskSchema.set('toJSON', (request, returnedObject) => {
-    returnedObject.id = returnedObject._id
-    delete returnedObject._id
-    delete returnedObject.__v
+taskSchema.set('toJSON', {
+    transform: (request, returnedObject) => {
+        returnedObject.id = returnedObject._id
+        delete returnedObject._id
+        delete returnedObject.__v
+    }
 })
 
 module.exports = mongoose.model('Task', taskSchema)

@@ -30,21 +30,6 @@ userRouter.get('/', async (req, res) => {
     res.json(users.map(u => u.toJSON()))
 })
 
-const removeUnwanted = userObject => {
-    userObject.teams = userObject.teams.map(t => {
-        return {
-            id: t._id,
-            name: t.name,
-            admin: t.admin.username,
-            members: t.members.length,
-            createdAt: t.createdAt,
-        }
-    })
-
-    console.log(userObject)
-    return userObject
-}
-
 userRouter.get('/:username', async (req, res) => {
     const token = getTokenFrom(req)
 
@@ -63,10 +48,8 @@ userRouter.get('/:username', async (req, res) => {
                 model: 'User',
             }
         })
-    
-    const toReturn = removeUnwanted(user.toJSON())
 
-    res.json(toReturn)
+    res.json(user.toJSON())
 })
 
 //Errors yet to be cleared in this route

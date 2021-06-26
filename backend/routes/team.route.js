@@ -20,6 +20,22 @@ teamRouter.get('/', async (req, res) => {
     res.json(teams)
 })
 
+teamRouter.get('/search', async (req, res) => {
+    const searchWord = req.body.searchWord
+    const ObjectId = mongoose.Types.ObjectId
+    const searchId = new ObjectId(searchWord.length < 12 ? '123456789012' : searchWord)
+
+    let teamList = await Team
+        .find({ $or: [
+            { '_id': searchId },
+            { 'name': searchWord },
+        ] })
+        .populate('admin')
+        .populate('members')
+
+    res.json(teamList)
+})
+
 teamRouter.post('/', async (req, res) => {
     const token = getTokenFrom(req)
     const decodedToken = jwt.verify(token, process.env.SECRET)
