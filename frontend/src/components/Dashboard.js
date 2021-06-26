@@ -28,7 +28,7 @@ const Dashboard = () => {
                 onClick={logout} >
                 Logout
             </button>
-            <TeamList user={currentUser}/>
+            <TeamList user={currentUser.teams}/>
         </HeaderNavLayout>
     )
 }

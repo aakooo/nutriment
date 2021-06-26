@@ -20,6 +20,7 @@ const Span = styled.span`
 
 const TeamCard = (props) => {
     const team = props.team
+    console.log(team)
 
     return (
         <div style={{
@@ -32,8 +33,8 @@ const TeamCard = (props) => {
 
                 <p style = {{ fontSize: '1.8em', margin: 0, }}>{team.name}</p>
                 <Ul >
-                    <Li><Span>Admin: </Span>{team.admin}</Li>
-                    <Li><Span>No. of members: </Span>{team.members}</Li>
+                    <Li><Span>Admin: </Span>{team.admin.username}</Li>
+                    <Li><Span>No. of members: </Span>{team.members.length}</Li>
                     <Li><Span>Date created: </Span>{team.createdAt.substring(0, 10)}</Li>
                 </Ul>
             </Link>
@@ -41,14 +42,14 @@ const TeamCard = (props) => {
     )
 }
 
-const TeamList = ({ user }) => {
+const TeamList = ({ teams }) => {
     
 
     // useEffect(() => {
 
     // }, [currentUser])
 
-    if (!user) {
+    if (!teams) {
         return (
             <div>
                 Loading ...
@@ -62,7 +63,7 @@ const TeamList = ({ user }) => {
                 display: 'block',
                 paddingLeft: 0,
             }}>
-                {user.teams.map(team => {
+                {teams.map(team => {
                     return <TeamCard team={team} key={team.id}/>
                 })}
             </ul>
