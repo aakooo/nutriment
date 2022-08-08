@@ -48,6 +48,9 @@ const LoginForm = () => {
 
                 console.log(data)
             })
+            .catch (error => {
+                console.log(error)
+            })
         // dispatch(userLogin({ username, password }))
         // console.log(token)
     }

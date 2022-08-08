@@ -11,8 +11,15 @@ const userLogin = async userDetails => {
     return res.data
 }
 
+const createUser = async userDetails => {
+    const res = await axios.post(`${baseurl}/users`, userDetails)
+
+    return res.data
+}
+
 const authService = {
-    userLogin
+    userLogin,
+    createUser,
 }
 
 export default authService

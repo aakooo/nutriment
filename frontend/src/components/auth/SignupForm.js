@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import authService from '../../services/authService'
 
 import { Form, Col } from 'react-bootstrap'
 import styled from 'styled-components'
@@ -38,6 +39,7 @@ const SignupForm = () => {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate()
     // const [formErrors, setFormErrors] = useState(null);
 
     const onSubmit = async event => {
@@ -46,6 +48,19 @@ const SignupForm = () => {
         const userData = {
             firstName, lastName, email, phone, password
         }
+
+        authService.createUser(userData)
+            .then(data => {
+                if (data) {
+                    console.log(data)
+                    navigate('/')
+                }
+
+                console.log(data)
+            })
+            .catch (error => {
+                console.log(error)
+            })
         
         // if (!formErrors) {
         //     await authService.createUser(userData)
