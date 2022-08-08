@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import authService from '../../services/authService'
 
 import { Alert, Form } from 'react-bootstrap'
 import { Button, bgGradient, mediaQuery, ButtonHolder } from '../styled'
@@ -31,12 +32,22 @@ const labelStyle = {
 }
 
 const LoginForm = () => {
-    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const navigate = useNavigate()
 
     const onSubmit = event => {
         event.preventDefault()
 
+        authService.userLogin({email, password})
+            .then(data => {
+                if (data.login) {
+                    console.log(data)
+                    navigate('/dashboard')
+                }
+
+                console.log(data)
+            })
         // dispatch(userLogin({ username, password }))
         // console.log(token)
     }
@@ -55,12 +66,12 @@ const LoginForm = () => {
             }}
                 onSubmit={onSubmit} >
                 <Form.Group>
-                    <Form.Label style={labelStyle}>Username/Email</Form.Label>
+                    <Form.Label style={labelStyle}>Phone/Email</Form.Label>
 
                     <Form.Control
                         type="text"
-                        name="username"
-                        onChange={({ target }) => setUsername(target.value)} />
+                        name="Email"
+                        onChange={({ target }) => setEmail(target.value)} />
                 </Form.Group>
 
                 <Form.Group>

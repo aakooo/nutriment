@@ -35,7 +35,6 @@ const SignupForm = () => {
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
@@ -45,7 +44,7 @@ const SignupForm = () => {
         event.preventDefault()
 
         const userData = {
-            firstName, lastName, username, email, phone, password
+            firstName, lastName, email, phone, password
         }
         
         // if (!formErrors) {
