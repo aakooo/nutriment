@@ -13,6 +13,11 @@ const userLogin = async userDetails => {
 
 const createUser = async userDetails => {
     const res = await axios.post(`${baseurl}/users`, userDetails)
+    await axios.post(`${baseurl}/preferences`, {
+        user: res.data.user.id,
+        breakfast: false,
+        lunch: false
+    })
 
     return res.data
 }

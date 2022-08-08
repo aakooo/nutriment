@@ -42,11 +42,8 @@ const LoginForm = () => {
         authService.userLogin({email, password})
             .then(data => {
                 if (data.login) {
-                    console.log(data)
-                    navigate('/dashboard')
+                    navigate('/dashboard', {state: data})
                 }
-
-                console.log(data)
             })
             .catch (error => {
                 console.log(error)
