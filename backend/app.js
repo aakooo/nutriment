@@ -9,7 +9,7 @@ const logger = require('./utils/logger')
 
 const userRouter = require('./routes/user.route')
 const loginRouter = require('./routes/login.route')
-const teamRouter = require('./routes/team.route')
+const preferenceRouter = require('./routes/preference.route')
 
 const app = express()
 
@@ -30,12 +30,12 @@ app.use(express.json())
 app.use(middleware.requestLogger)
 
 app.get('/', (request, response) => {
-    response.send('<p>Oversee backend api</p>')
+    response.send('<p>Nutriment backend api</p>')
 })
 
 app.use('/api/users', userRouter)
 app.use('/api/login', loginRouter)
-app.use('/api/teams', teamRouter)
+app.use('/api/preferences', preferenceRouter)
 
 app.use(middleware.unknownEndPoint)
 app.use(middleware.errorHandler)

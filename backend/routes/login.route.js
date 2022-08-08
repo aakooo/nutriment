@@ -8,7 +8,7 @@ loginRouter.post('/', async (req, res) => {
     const body = req.body
 
     const user = await User.findOne({
-        $or: [{ username: body.username }, { email: body.username }]
+        $or: [{ phone: body.email }, { email: body.email }]
     })
 
     const passwordCorrect = user === null
@@ -20,23 +20,10 @@ loginRouter.post('/', async (req, res) => {
             error: 'invalid username or password'
         })
     }
-
-    const userForToken = {
-        username: user.username,
-        id: user._id,
-    }
-
-    const token = jwt.sign(
-        userForToken,
-        process.env.SECRET,
-        { expiresIn: 60*60*24 },    
-    )
     
     res.status(200).send({
-        token,
-        username: user.username,
-        firstName: user.firstName,
-        lastName: user.lastName
+        login: true,
+        user
     })
 })
 

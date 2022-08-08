@@ -1,13 +1,6 @@
 const mongoose = require('mongoose')
 
 var userSchema = new mongoose.Schema({
-    username: {
-        type: String,
-        minLength: 4,
-        maxLength: 20,
-        required: true,
-        unique: true
-    },
     password: {
         type: String,
         required: true
@@ -25,15 +18,10 @@ var userSchema = new mongoose.Schema({
         required: true
     },
     phone: {
-        type: Number,
+        type: String,
+        required: true,
         unique: true
     },
-    teams: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Team'
-        }
-    ]
 }, {
     timestamps: true
 })
